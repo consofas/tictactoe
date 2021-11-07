@@ -9,10 +9,13 @@ function Square(props) {
         </button>
     );
 }
+
+class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            values: null,
+            squares: Array(9).fill(null),
+            xIsNext: true,
         };
     }
 

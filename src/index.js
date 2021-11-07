@@ -16,14 +16,17 @@ function Square(props) {
         };
     }
 
-	render() {
-		return <button className="square" onClick={() => this.setState({value: 'X'})}>{this.state.value}</button>;
-	}
-}
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
 
-class Board extends React.Component {
 	renderSquare(i) {
-		return <Square value={i} />;
+		return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
 	}
 
 	render() {

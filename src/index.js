@@ -53,7 +53,7 @@ class Game extends React.Component {
     }
 
     handleClick(i) {
-        const history = this.state.history;
+        const history = this.state.history.slice(0, this.state.stepNumber +1);
         const current = history[history.length -1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
@@ -64,6 +64,7 @@ class Game extends React.Component {
             history: history.concat([{
                 squares: squares,
             }]),
+            stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
         });
     }
@@ -77,7 +78,7 @@ class Game extends React.Component {
 
 	render() {
         const history = this.state.history;
-        const current = history[history.length -1];
+        const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
 
         const moves = history.map((step, move) => {
@@ -132,3 +133,16 @@ function calculateWinner(squares) {
 // ========================================
 
 ReactDOM.render(<Game />, document.getElementById("root"));
+
+
+/*
+If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game which are listed in order of increasing difficulty:
+
+    Display the location for each move in the format (col, row) in the move history list.
+    Bold the currently selected item in the move list.
+    Rewrite Board to use two loops to make the squares instead of hardcoding them.
+    Add a toggle button that lets you sort the moves in either ascending or descending order.
+    When someone wins, highlight the three squares that caused the win.
+    When no one wins, display a message about the result being a draw.
+
+*/
